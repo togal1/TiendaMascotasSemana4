@@ -20,49 +20,37 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 public class PerfilAdaptador extends RecyclerView.Adapter<PerfilAdaptador.PerfilViewHolder> {
-    ArrayList<Perfil> fotos;
+    public static class PerfilViewHolder extends RecyclerView.ViewHolder {
+
+        private ImageView imgFoto;
+        private TextView tvLike;
+
+        public PerfilViewHolder(@NonNull View itemView) {
+            super(itemView);
+            imgFoto = (ImageView) itemView.findViewById(R.id.imgFoto);
+            tvLike = (TextView) itemView.findViewById(R.id.tvlikeCV);
+        }
+    }
+
+    public ArrayList<Perfil> fotos;
 
     public PerfilAdaptador(ArrayList<Perfil> fotos) {
         this.fotos = fotos;
     }
 
-    public static class PerfilViewHolder extends RecyclerView.ViewHolder {
-
-        private ImageView imgFoto;
-        private TextView tvLike;
-        private ImageButton btnLink;
-
-
-        public PerfilViewHolder(@NonNull View itemView) {
-            super(itemView);
-            imgFoto  = (ImageView) itemView.findViewById(R.id.imgFoto);
-            tvLike   = (TextView) itemView.findViewById(R.id.tvlikeCV);
-            btnLink  = (ImageButton) itemView.findViewById(R.id.btnLike);
-        }
-    }
     @NonNull
     @Override
-    public PerfilViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview, parent, false); //asocia layout con RecyclerView
-        return new PerfilViewHolder(v);
+    public PerfilAdaptador.PerfilViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_perfil, parent, false); //asocia layout con RecyclerView
+        PerfilAdaptador.PerfilViewHolder perfilViewHolder = new PerfilAdaptador.PerfilViewHolder(v);
+        return perfilViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PerfilViewHolder perfilViewHolder, int position) {
-        final Perfil perfil = fotos.get(position);
-
-        perfilViewHolder.imgFoto.setImageResource(perfil.getFotoPerfil());
-        perfilViewHolder.tvLike.setText(perfil.getLike());
-
-       perfilViewHolder.btnLink.setOnClickListener(new View.OnClickListener(){
-           @Override
-           public void onClick(View v){
-               perfil.setLike(perfil.getLike()+1);
-               notifyDataSetChanged();
-           }
-        });
+    public void onBindViewHolder(@NonNull PerfilAdaptador.PerfilViewHolder perfilViewHolder, int position) {
+        perfilViewHolder.tvLike.setText(String.valueOf(fotos.get(position).getLike()));
+        perfilViewHolder.imgFoto.setImageResource(fotos.get(position).getFotoPerfil());
     }
-
 
     @Override
     public int getItemCount() {

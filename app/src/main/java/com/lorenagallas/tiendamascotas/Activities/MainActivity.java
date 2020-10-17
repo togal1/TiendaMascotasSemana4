@@ -21,9 +21,6 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
-    //crear array para guardar coleccion mascotas
-    private ArrayList<Mascota> mascotas;
-    private RecyclerView listaMascotas;
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -57,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(new PaginaAdaptador(getSupportFragmentManager(), agregarFragments()));
         tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.getTabAt(0).setIcon(R.drawable.camara);
-        tabLayout.getTabAt(1).setIcon(R.drawable.colibri);
+        tabLayout.getTabAt(0).setIcon(R.drawable.huella);
+        tabLayout.getTabAt(1).setIcon(R.drawable.perro);
     }
 
     @Override

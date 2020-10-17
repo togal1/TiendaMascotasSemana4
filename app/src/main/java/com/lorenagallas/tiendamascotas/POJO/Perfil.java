@@ -24,5 +24,14 @@ public class Perfil {
     public void setLike(int like) {
         this.like = like;
     }
+
+    @Override
+    public String toString() {
+        return "Mascota{" +
+                '\'' +
+                ", foto=" + fotoPerfil +
+                ", like=" + like +
+                '}';
+    }
 }
 

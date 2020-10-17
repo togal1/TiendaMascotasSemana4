@@ -1,17 +1,18 @@
 package com.lorenagallas.tiendamascotas.Fragments;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.lorenagallas.tiendamascotas.Adaptador.PaginaAdaptador;
+import com.lorenagallas.tiendamascotas.Adaptador.PerfilAdaptador;
+import com.lorenagallas.tiendamascotas.POJO.Perfil;
 import com.lorenagallas.tiendamascotas.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,7 +34,8 @@ public class PerfilFragment extends Fragment {
         // Required empty public constructor
     }
 
-
+    private RecyclerView rvPerfil;
+    private PerfilAdaptador perfilAdaptador;
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -64,9 +66,31 @@ public class PerfilFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_perfil, container, false);
+        rvPerfil = v.findViewById(R.id.rvPerfil);
+       // rvPerfil.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        return inflater.inflate(R.layout.fragment_perfil, container, false);
+        GridLayoutManager  glm = new GridLayoutManager(getActivity(),2);
+        rvPerfil.setLayoutManager(glm);
+        perfilAdaptador = new  PerfilAdaptador(obtenerPerfil());
+        rvPerfil.setAdapter(perfilAdaptador);
 
+        return v;
+        // Inflate the layout for this fragment
+    }
 
+    public ArrayList<Perfil> obtenerPerfil() {
+        ArrayList<Perfil> fotos = new ArrayList<>();
+        fotos.add(new Perfil(R.drawable.gato, 125));
+        fotos.add(new Perfil(R.drawable.gato, 236));
+        fotos.add(new Perfil(R.drawable.gato, 23));
+        fotos.add(new Perfil(R.drawable.gato, 198));
+        fotos.add(new Perfil(R.drawable.gato, 18));
+        fotos.add(new Perfil(R.drawable.gato, 112));
+        fotos.add(new Perfil(R.drawable.gato, 98));
+        fotos.add(new Perfil(R.drawable.gato, 9));
+        fotos.add(new Perfil(R.drawable.gato, 325));
+
+        return fotos;
     }
 }
